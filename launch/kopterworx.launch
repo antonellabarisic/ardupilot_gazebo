@@ -5,9 +5,10 @@
 	<arg name="x" default="0.0"/>
 	<arg name="y" default="0.0"/>
 	<arg name="z" default="0.5"/>
-  <arg name="enable_ground_truth" default="true"/>
+    <arg name="enable_ground_truth" default="true"/>
 	<arg name="enable_velodyne" default="false" />
 	<arg name="enable_rotating_velodyne" default="false"/>
+	<arg name="enable_gimbal" default="true"/>
 	<arg name="model" value="$(find ardupilot_gazebo)/models/kopterworx/urdf/kopterworx.urdf.xacro" />
 	<arg name="world" default="worlds/empty.world"/>
 	<arg name="fdm_port_in" default="9002"/>
@@ -30,6 +31,7 @@
 		namespace:=$(arg name)
 		enable_velodyne:=$(arg enable_velodyne)
 		enable_rotating_velodyne:=$(arg enable_rotating_velodyne)
+		enable_gimbal:=$(arg enable_gimbal)
 		fdm_port_in:=$(arg fdm_port_in)
 		fdm_port_out:=$(arg fdm_port_out)
 		max_range:=$(arg max_range)
