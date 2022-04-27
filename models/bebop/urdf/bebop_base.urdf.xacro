@@ -62,7 +62,7 @@
     direction="cw"
     motor_constant="${motor_constant}"
     moment_constant="${moment_constant}"
-    parent="base_link"
+    parent="$(arg namespace)/base_link"
     mass_rotor="${mass_rotor}"
     radius_rotor="${radius_rotor}"
     time_constant_up="${time_constant_up}"
@@ -83,7 +83,7 @@
     direction="ccw"
     motor_constant="${motor_constant}"
     moment_constant="${moment_constant}"
-    parent="base_link"
+    parent="$(arg namespace)/base_link"
     mass_rotor="${mass_rotor}"
     radius_rotor="${radius_rotor}"
     time_constant_up="${time_constant_up}"
@@ -104,7 +104,7 @@
     direction="ccw"
     motor_constant="${motor_constant}"
     moment_constant="${moment_constant}"
-    parent="base_link"
+    parent="$(arg namespace)/base_link"
     mass_rotor="${mass_rotor}"
     radius_rotor="${radius_rotor}"
     time_constant_up="${time_constant_up}"
@@ -125,7 +125,7 @@
     direction="cw"
     motor_constant="${motor_constant}"
     moment_constant="${moment_constant}"
-    parent="base_link"
+    parent="$(arg namespace)/base_link"
     mass_rotor="${mass_rotor}"
     radius_rotor="${radius_rotor}"
     time_constant_up="${time_constant_up}"
@@ -159,7 +159,7 @@
     namespace="$(arg camera_namespace)"
     camera_link="${camera_link}"
     camera_mass="${camera_mass}"
-    parent="base_link">
+    parent="$(arg namespace)/base_link">
 
     <!-- Front Facing Camera -->
     <!--origin xyz="0.111 0 0.0217" rpy="0 1.57079632 0"/-->
