@@ -26,6 +26,9 @@
   <xacro:arg name="magnet_dipole_moment_z" default="970" />
   <xacro:property name="dp_z" value="$(arg magnet_dipole_moment_z)" />
 
+  <xacro:property name="fdm_port_in" value="$(arg fdm_port_in)"/>
+  <xacro:property name="fdm_port_out" value="$(arg fdm_port_out)"/>
+
   <!-- Instantiate mmuav "mechanics" -->
   <xacro:include filename="$(find ardupilot_gazebo)/models/ardrone/urdf/uav.base.urdf.xacro" />
   <xacro:include filename="$(find rotors_description)/urdf/component_snippets.xacro" />
@@ -39,7 +42,7 @@
     </inertial>
   </link>
   <joint name="pose_sensor1_joint" type="revolute">
-    <parent link="base_link" />
+    <parent link="$(arg name)/base_link" />
     <origin xyz="0 0 0" rpy="0 0 0" />
     <child link="pose_sensor1_link" />
     <limit upper="0" lower="0" effort="0" velocity="0" />
@@ -92,9 +95,9 @@
   <!-- Mount first generic pose sensor-->
   <xacro:odometry_plugin_macro
     namespace="$(arg name)"
-    odometry_sensor_suffix="1"
+    odometry_sensor_suffix=""
     child_frame_id="base"
-    parent_link="base_link"
+    parent_link="$(arg name)/base_link"
     pose_topic="pose"
     velocity_relative_topic="velocity_relative"
     pose_with_covariance_topic="pose_with_covariance"
@@ -121,17 +124,17 @@
     <origin xyz="0.0 0.0 0" rpy="0.0 0.0 0.0" />
   </xacro:odometry_plugin_macro>
 
-	<xacro:ardupilot
-		imu_topic="/$(arg name)/imu"
-		control_topic="/$(arg name)/gazebo/command/motor_speed"
-		imu_sensor_name="uav::imu_link::imu_sensor"
-		rotor_0_joint="uav::rotor_0_joint"
-		rotor_1_joint="uav::rotor_1_joint"
-		rotor_2_joint="uav::rotor_2_joint"
-		rotor_3_joint="uav::rotor_3_joint"
-		thrust_multiplier="1475"
-    fdm_port_in="9002"
-		fdm_port_out="9003">
-	</xacro:ardupilot>
+  <xacro:ardupilot
+    imu_topic="/$(arg name)/imu"
+    control_topic="/$(arg name)/gazebo/command/motor_speed"
+    imu_sensor_name="$(arg name)::imu_link::imu_sensor"
+    rotor_0_joint="$(arg name)::$(arg name)/rotor_0_joint"
+    rotor_1_joint="$(arg name)::$(arg name)/rotor_1_joint"
+    rotor_2_joint="$(arg name)::$(arg name)/rotor_2_joint"
+    rotor_3_joint="$(arg name)::$(arg name)/rotor_3_joint"
+    thrust_multiplier="1475"
+    fdm_port_in="${fdm_port_in}"
+    fdm_port_out="${fdm_port_out}">
+  </xacro:ardupilot>
 
 </robot>
