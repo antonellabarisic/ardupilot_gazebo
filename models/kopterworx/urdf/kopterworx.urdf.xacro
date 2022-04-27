@@ -10,6 +10,8 @@
 	<xacro:property name="fdm_port_out" value="$(arg fdm_port_out)"/>
 	<xacro:property name="max_range" value="$(arg max_range)"/>
 	<xacro:property name="laser_count" value="$(arg laser_count)"/>
+	<xacro:property name="enable_gimbal" value="$(arg enable_gimbal)"/>
+
 	
 	<gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
@@ -142,21 +144,22 @@
 		<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
 	</xacro:odometry_plugin_macro>
 
-<!-- Choose one of the following (and comment out the other): fixed RGBD camera or gimbal with RGBD camera. -->	
-
-  <xacro:cam
-    namespace="$(arg namespace)"
-    camera_link="${camera_size}"
-    camera_mass="${camera_mass}"
-    parent="${namespace}/base_link">
-		<xacro:insert_block name="front_facing_camera"/>    
-    <xacro:insert_block name="camera_inertia"/>
-  </xacro:cam>
-
-	<!-- <xacro:gimbal_macro 
-		namespace="$(arg namespace)"
-		parent="${namespace}/base_link">
-	<origin xyz="0.25 0 -0.1" rpy="0 0 0"/>
-	</xacro:gimbal_macro> -->
+	<xacro:if value="${enable_gimbal}">
+		<xacro:gimbal_macro 
+			namespace="$(arg namespace)"
+			parent="${namespace}/base_link">
+		<origin xyz="0.25 0 -0.1" rpy="0 0 0"/>
+		</xacro:gimbal_macro>
+	</xacro:if>
+	<xacro:unless value="${enable_gimbal}">
+		<xacro:cam
+			namespace="$(arg namespace)"
+			camera_link="${camera_size}"
+			camera_mass="${camera_mass}"
+			parent="${namespace}/base_link">
+				<xacro:insert_block name="front_facing_camera"/>    
+			<xacro:insert_block name="camera_inertia"/>
+		</xacro:cam>
+	</xacro:unless>
 
 </robot>
