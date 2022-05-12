@@ -8,7 +8,6 @@
 
   <!-- Body Properties -->
   <xacro:property name="rotor_velocity_slowdown_sim" value="15" />
-  <xacro:property name="mesh_file" value="ardupilot_gazebo/models/kopterworx/meshes/kopterworx_model_simple.dae" />
   <xacro:property name="mesh_scale" value="0.1" />
   <xacro:property name="prop_scale" value="0.002" />
   <xacro:property name="mass" value="9" />  <!-- [kg] -->

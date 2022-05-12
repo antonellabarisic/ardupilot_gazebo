@@ -12,6 +12,8 @@
 	<xacro:property name="laser_count" value="$(arg laser_count)"/>
 	<xacro:property name="enable_gimbal" value="$(arg enable_gimbal)"/>
 
+
+
 	
 	<gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
@@ -42,6 +44,9 @@
     izz="1e-12"
     ixy="0.0" ixz="0.0" iyz="0.0" />
   </xacro:property>
+
+	<xacro:property name="mesh_file" value="ardupilot_gazebo/models/kopterworx/meshes/kopterworx_model_simple.dae" />
+
 
   <!-- Instantiate kopterworx mechanics "mechanics" -->
 	<xacro:include filename="$(find ardupilot_gazebo)/models/kopterworx/urdf/kopterworx_base.urdf.xacro" />
